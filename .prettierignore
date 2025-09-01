@@ -1,0 +1,21 @@
+# Build outputs
+build/
+.react-router/
+dist/
+
+# Dependencies
+node_modules/
+
+# Generated files
+package-lock.json
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

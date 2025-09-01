@@ -1,0 +1,381 @@
+/* GeoCities Core - The Ultimate 90s Web Framework */
+
+/* Background Patterns */
+.stars-background {
+  background:
+    radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+    radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+    radial-gradient(2px 2px at 160px 30px, #ddd, transparent), #000;
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+.space-background {
+  background:
+    url("/gifs/space/stars.gif") repeat,
+    linear-gradient(45deg, #000011 0%, #000033 50%, #000011 100%);
+}
+
+.flame-border {
+  border: 3px solid;
+  border-image: url("/gifs/flames/flame-border.gif") 3 repeat;
+}
+
+/* Classic 90s Elements */
+.under-construction {
+  display: inline-block;
+  background: url("/gifs/under-construction/construction.gif") no-repeat center;
+  width: 100px;
+  height: 50px;
+  margin: 10px;
+}
+
+.visitor-counter {
+  background: #000;
+  border: 2px inset #ccc;
+  color: #0f0;
+  font-family: monospace;
+  padding: 4px 8px;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.visitor-counter::before {
+  content: "👽 Visitors: ";
+}
+
+/* Marquee replacement using CSS */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--color-cosmic-black);
+  border: 2px solid var(--color-neon-green);
+  padding: 8px 0;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: slide-right 20s linear infinite;
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--color-neon-yellow);
+}
+
+.marquee-fast .marquee-content {
+  animation-duration: 10s;
+}
+
+.marquee-slow .marquee-content {
+  animation-duration: 30s;
+}
+
+/* 3D Text Effects */
+.text-3d {
+  color: var(--color-neon-cyan);
+  text-shadow:
+    1px 1px 0 var(--color-neon-blue),
+    2px 2px 0 var(--color-space-purple),
+    3px 3px 0 var(--color-cosmic-black),
+    4px 4px 4px rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.text-spinning {
+  animation: spin-3d 3s linear infinite;
+  transform-style: preserve-3d;
+  display: inline-block;
+}
+
+/* Retro Form Elements */
+.retro-input {
+  background: var(--color-cosmic-black);
+  border: 2px inset var(--color-star-silver);
+  color: var(--color-neon-green);
+  font-family: var(--font-terminal);
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+.retro-input:focus {
+  outline: none;
+  border-color: var(--color-neon-cyan);
+  box-shadow: 0 0 5px var(--color-neon-cyan);
+}
+
+.retro-select {
+  background: var(--color-retro-gray);
+  border: 2px outset var(--color-star-silver);
+  color: var(--color-blink-white);
+  font-family: var(--font-retro);
+  padding: 4px;
+}
+
+.retro-checkbox {
+  width: 16px;
+  height: 16px;
+  background: var(--color-cosmic-black);
+  border: 2px inset var(--color-star-silver);
+  position: relative;
+  cursor: pointer;
+}
+
+.retro-checkbox:checked::after {
+  content: "✓";
+  position: absolute;
+  color: var(--color-neon-green);
+  font-weight: bold;
+  left: 2px;
+  top: -2px;
+}
+
+/* UFO Checkboxes (Special for playlist selection) */
+.ufo-checkbox {
+  width: 24px;
+  height: 24px;
+  background: url("/gifs/aliens/ufo-small.gif") no-repeat center;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.ufo-checkbox:checked::after {
+  content: "🛸";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+/* Loading Animations */
+.alien-loader {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: url("/gifs/aliens/spinning-alien.gif") no-repeat center;
+  background-size: contain;
+  animation: float 2s ease-in-out infinite;
+}
+
+.beam-loader {
+  width: 100px;
+  height: 20px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-neon-green) 50%,
+    transparent 100%
+  );
+  animation: slide-right 2s ease-in-out infinite;
+  border-radius: 10px;
+}
+
+/* Retro Tables */
+.retro-table {
+  border-collapse: collapse;
+  background: var(--color-cosmic-black);
+  color: var(--color-neon-green);
+  font-family: var(--font-terminal);
+  width: 100%;
+}
+
+.retro-table th,
+.retro-table td {
+  border: 1px solid var(--color-neon-cyan);
+  padding: 8px;
+  text-align: left;
+}
+
+.retro-table th {
+  background: var(--color-retro-gray);
+  color: var(--color-blink-white);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.retro-table tr:nth-child(even) {
+  background: rgba(0, 255, 0, 0.1);
+}
+
+/* Window Frames (90s style) */
+.retro-window {
+  background: var(--color-retro-gray);
+  border: 2px outset var(--color-star-silver);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.retro-window-header {
+  background: linear-gradient(
+    90deg,
+    var(--color-alien-blue),
+    var(--color-space-purple)
+  );
+  color: var(--color-blink-white);
+  padding: 4px 8px;
+  font-family: var(--font-retro);
+  font-weight: bold;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.retro-window-controls {
+  display: flex;
+  gap: 2px;
+}
+
+.retro-window-control {
+  width: 16px;
+  height: 16px;
+  background: var(--color-retro-gray);
+  border: 1px outset var(--color-star-silver);
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.retro-window-control:active {
+  border-style: inset;
+}
+
+.retro-window-content {
+  padding: 16px;
+  background: var(--color-cosmic-black);
+  color: var(--color-neon-green);
+  min-height: 100px;
+}
+
+/* Progress Bars */
+.retro-progress {
+  width: 100%;
+  height: 20px;
+  background: var(--color-cosmic-black);
+  border: 2px inset var(--color-star-silver);
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-progress-bar {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--color-neon-green),
+    var(--color-neon-cyan),
+    var(--color-neon-green)
+  );
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.retro-progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.2) 25%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 50%,
+    transparent 75%,
+    rgba(255, 255, 255, 0.2) 75%
+  );
+  background-size: 20px 20px;
+  animation: slide-right 1s linear infinite;
+}
+
+/* Alert Boxes */
+.retro-alert {
+  background: var(--color-warning-red);
+  color: var(--color-blink-white);
+  border: 3px solid var(--color-blink-white);
+  padding: 16px;
+  font-family: var(--font-retro);
+  font-weight: bold;
+  text-align: center;
+  animation: blink 0.5s step-end infinite;
+  box-shadow:
+    0 0 10px var(--color-warning-red),
+    inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.retro-success {
+  background: var(--color-neon-green);
+  color: var(--color-cosmic-black);
+  border: 3px solid var(--color-cosmic-black);
+  animation: pulse-glow 1s ease-in-out infinite;
+}
+
+/* Retro Lists */
+.retro-list {
+  list-style: none;
+  padding: 0;
+  font-family: var(--font-terminal);
+}
+
+.retro-list li {
+  padding: 4px 0;
+  border-bottom: 1px dotted var(--color-neon-cyan);
+  position: relative;
+}
+
+.retro-list li::before {
+  content: "► ";
+  color: var(--color-neon-yellow);
+  font-weight: bold;
+}
+
+.retro-list li:hover {
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--color-neon-cyan);
+}
+
+/* Floating Elements */
+.float-element {
+  animation: float 3s ease-in-out infinite;
+}
+
+.float-slow {
+  animation-duration: 6s;
+}
+
+.float-fast {
+  animation-duration: 1.5s;
+}
+
+/* Web Ring Style Navigation */
+.web-ring {
+  background: var(--color-retro-gray);
+  border: 2px outset var(--color-star-silver);
+  padding: 8px;
+  text-align: center;
+  font-family: var(--font-retro);
+  font-size: 12px;
+}
+
+.web-ring a {
+  color: var(--color-neon-yellow);
+  text-decoration: none;
+  margin: 0 4px;
+  padding: 2px 4px;
+  border: 1px outset var(--color-star-silver);
+  background: var(--color-retro-gray);
+}
+
+.web-ring a:hover {
+  border-style: inset;
+  background: var(--color-neon-yellow);
+  color: var(--color-cosmic-black);
+}

@@ -1,0 +1,249 @@
+@import "tailwindcss";
+@import "./styles/geocities-core.css";
+
+/* PeloJams - Retro 90s Cult Theme */
+@theme {
+  /* Retro Fonts - Maximum 90s Energy */
+  --font-terminal: "Courier New", "Monaco", "Menlo", monospace;
+  --font-retro: "Times New Roman", "serif";
+  --font-comic: "Comic Sans MS", "cursive";
+  --font-sans: var(--font-retro);
+
+  /* Cosmic Color Palette */
+  --color-neon-green: #00ff00;
+  --color-neon-cyan: #00ffff;
+  --color-neon-pink: #ff00ff;
+  --color-neon-yellow: #ffff00;
+  --color-terminal-green: #00cc00;
+  --color-warning-red: #ff0000;
+  --color-space-purple: #6600cc;
+  --color-alien-blue: #0066ff;
+  --color-deep-space: #000011;
+  --color-star-silver: #cccccc;
+
+  /* Custom color extensions */
+  --color-cosmic-black: #000000;
+  --color-retro-gray: #333333;
+  --color-blink-white: #ffffff;
+
+  /* Spacing for retro layouts */
+  --spacing-retro: 8px;
+  --spacing-cosmic: 16px;
+  --spacing-alien: 24px;
+
+  /* Border styles */
+  --border-retro: 2px solid;
+  --border-thick: 4px solid;
+  --border-bevel: 3px outset;
+}
+
+/* Global Retro Styles */
+html {
+  background: var(--color-cosmic-black);
+  color: var(--color-neon-green);
+  font-family: var(--font-terminal);
+  cursor: url("/cursors/sparkle.cur"), auto;
+}
+
+body {
+  background: var(--color-cosmic-black);
+  color: var(--color-neon-green);
+  margin: 0;
+  padding: 0;
+  overflow-x: auto; /* Allow horizontal scroll for that 90s feel */
+}
+
+/* Retro Animations */
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    color: red;
+  }
+  16% {
+    color: orange;
+  }
+  32% {
+    color: yellow;
+  }
+  48% {
+    color: green;
+  }
+  64% {
+    color: blue;
+  }
+  80% {
+    color: indigo;
+  }
+  100% {
+    color: violet;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--color-neon-green);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 20px var(--color-neon-green),
+      0 0 30px var(--color-neon-green);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes spin-3d {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Retro Component Classes */
+.blink {
+  animation: blink 1s step-end infinite;
+}
+
+.blink-fast {
+  animation: blink 0.5s step-end infinite;
+}
+
+.blink-slow {
+  animation: blink 2s step-end infinite;
+}
+
+.rainbow-text {
+  animation: rainbow 3s linear infinite;
+  font-weight: bold;
+  text-shadow: 2px 2px 0px var(--color-cosmic-black);
+}
+
+.terminal-text {
+  font-family: var(--font-terminal);
+  color: var(--color-terminal-green);
+  text-shadow: 0 0 5px var(--color-terminal-green);
+}
+
+.neon-glow {
+  text-shadow:
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor,
+    0 0 20px currentColor;
+}
+
+.retro-button {
+  background: var(--color-retro-gray);
+  border: var(--border-bevel) var(--color-star-silver);
+  color: var(--color-blink-white);
+  font-family: var(--font-retro);
+  font-weight: bold;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.retro-button:hover {
+  background: var(--color-neon-green);
+  color: var(--color-cosmic-black);
+  animation: pulse-glow 0.5s ease-in-out;
+}
+
+.retro-button:active {
+  border-style: inset;
+}
+
+.cosmic-border {
+  border: var(--border-thick) var(--color-neon-cyan);
+  box-shadow:
+    0 0 10px var(--color-neon-cyan),
+    inset 0 0 10px var(--color-neon-cyan);
+}
+
+.alien-bg {
+  background: radial-gradient(
+    circle,
+    var(--color-space-purple) 0%,
+    var(--color-cosmic-black) 100%
+  );
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 16px;
+  background: var(--color-cosmic-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-neon-green);
+  border: 2px solid var(--color-cosmic-black);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-cyan);
+}
+
+/* Link Styling */
+a {
+  color: var(--color-neon-yellow);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+a:hover {
+  color: var(--color-neon-pink);
+  text-shadow: 0 0 5px var(--color-neon-pink);
+}
+
+a:visited {
+  color: var(--color-space-purple);
+}
+
+/* Selection styling */
+::selection {
+  background: var(--color-neon-green);
+  color: var(--color-cosmic-black);
+}

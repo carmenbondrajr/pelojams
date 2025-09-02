@@ -1,7 +1,12 @@
 import type { Config } from "@react-router/dev/config";
 
-export default {
+const config: Config = {
   // Server-side render by default, to enable SPA mode set this to `false`
   ssr: false,
-  basename: "/pelojams",
-} satisfies Config;
+};
+
+if (process.env.NODE_ENV === "production") {
+  config.basename = "/pelojams";
+}
+
+export default config;

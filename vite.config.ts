@@ -3,9 +3,9 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
-  base: "/pelojams/",
+  base: command === "build" ? "/pelojams/" : "/",
   server: {
     host: true, // This allows binding to all interfaces (127.0.0.1, localhost, etc.)
     port: 5173,
@@ -13,4 +13,4 @@ export default defineConfig({
   build: {
     outDir: "build",
   },
-});
+}));

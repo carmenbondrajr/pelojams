@@ -1,0 +1,1 @@
+import{p as o}from"./chunk-PVWAREVJ-CJI3TL4J.js";const r=({children:s,speed:t="medium",color:e="currentColor",className:n=""})=>{const l={slow:"blink-slow",medium:"blink",fast:"blink-fast"}[t];return o.jsx("span",{className:`${l} ${n}`,style:{color:e},children:s})};export{r as B};

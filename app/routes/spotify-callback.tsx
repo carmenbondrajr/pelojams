@@ -29,9 +29,18 @@ export default function SpotifyCallback() {
 
         setMessage("Exchanging cosmic frequencies...");
 
-        // Exchange code for tokens
-        const tokens = await spotifyService.getAccessToken(code);
+        // Get stored code verifier for PKCE
+        const codeVerifier = localStorage.getItem('spotify_code_verifier');
+        if (!codeVerifier) {
+          throw new Error('Code verifier not found - authentication flow corrupted');
+        }
+
+        // Exchange code for tokens using PKCE
+        const tokens = await spotifyService.getAccessToken(code, codeVerifier);
         spotifyService.storeTokens(tokens);
+
+        // Clean up code verifier
+        localStorage.removeItem('spotify_code_verifier');
 
         setMessage("Retrieving user profile from the mothership...");
 

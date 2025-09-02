@@ -79,9 +79,9 @@ export class SpotifyService {
   }
 
   /**
-   * Generate Spotify OAuth authorization URL
+   * Generate Spotify OAuth authorization URL with PKCE
    */
-  getAuthUrl(): string {
+  async getAuthUrl(): Promise<string> {
     const scopes = [
       "user-library-read",
       "playlist-read-private",
@@ -90,33 +90,51 @@ export class SpotifyService {
       "user-read-private",
     ];
 
+    const codeVerifier = this.generateCodeVerifier();
+    const codeChallenge = await this.generateCodeChallenge(codeVerifier);
+
+    // Store code verifier for later use in token exchange
+    localStorage.setItem("spotify_code_verifier", codeVerifier);
+
     const params = new URLSearchParams({
       response_type: "code",
       client_id: this.clientId,
       scope: scopes.join(" "),
       redirect_uri: this.getRedirectUri(),
       state: this.generateRandomString(16),
+      code_challenge: codeChallenge,
+      code_challenge_method: "S256",
     });
 
     return `https://accounts.spotify.com/authorize?${params.toString()}`;
   }
 
   /**
-   * Exchange authorization code for access token via secure server endpoint
+   * Exchange authorization code for access token using PKCE flow
+   * This is secure for client-side apps and required for SPA deployment
    */
-  async getAccessToken(code: string): Promise<SpotifyTokenResponse> {
-    const formData = new FormData();
-    formData.append("code", code);
-
-    const response = await fetch("/spotify-api", {
+  async getAccessToken(
+    code: string,
+    codeVerifier: string
+  ): Promise<SpotifyTokenResponse> {
+    const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        grant_type: "authorization_code",
+        code,
+        redirect_uri: this.getRedirectUri(),
+        client_id: this.clientId,
+        code_verifier: codeVerifier,
+      }),
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
+      const errorData = await response.text();
       throw new Error(
-        errorData.error || `Token exchange failed: ${response.statusText}`
+        `Token exchange failed: ${response.statusText} - ${errorData}`
       );
     }
 
@@ -333,6 +351,31 @@ export class SpotifyService {
   logout(): void {
     localStorage.removeItem("spotify_tokens");
     localStorage.removeItem("spotify_user");
+  }
+
+  /**
+   * Generate code verifier for PKCE
+   */
+  private generateCodeVerifier(): string {
+    const array = new Uint8Array(32);
+    crypto.getRandomValues(array);
+    return btoa(String.fromCharCode(...array))
+      .replace(/=/g, "")
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_");
+  }
+
+  /**
+   * Generate code challenge from verifier for PKCE
+   */
+  private async generateCodeChallenge(verifier: string): Promise<string> {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(verifier);
+    const digest = await crypto.subtle.digest("SHA-256", data);
+    return btoa(String.fromCharCode(...new Uint8Array(digest)))
+      .replace(/=/g, "")
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_");
   }
 
   /**

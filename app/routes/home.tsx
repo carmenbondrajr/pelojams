@@ -39,8 +39,8 @@ export default function Home() {
     return messages[Math.floor(Math.random() * messages.length)];
   };
 
-  const handleSpotifyConnect = () => {
-    const authUrl = spotifyService.getAuthUrl();
+  const handleSpotifyConnect = async () => {
+    const authUrl = await spotifyService.getAuthUrl();
     window.location.href = authUrl;
   };
 

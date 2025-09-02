@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { COSMIC_MESSAGES } from "~/utils/constants";
+import { spotifyService } from "~/services/spotify";
 
 export function meta() {
   return [
@@ -17,8 +20,32 @@ export function meta() {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<{ display_name: string } | null>(null);
+
+  useEffect(() => {
+    // Check if user is already authenticated
+    if (spotifyService.isAuthenticated()) {
+      setIsAuthenticated(true);
+      const storedUser = localStorage.getItem("spotify_user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    }
+  }, []);
+
   const getRandomMessage = (messages: readonly string[]) => {
     return messages[Math.floor(Math.random() * messages.length)];
+  };
+
+  const handleSpotifyConnect = () => {
+    const authUrl = spotifyService.getAuthUrl();
+    window.location.href = authUrl;
+  };
+
+  const handleProceedToPlaylists = () => {
+    navigate("/playlists");
   };
 
   return (
@@ -88,15 +115,45 @@ export default function Home() {
 
         {/* Initiation Protocol Button */}
         <div className="mb-12">
-          <button className="retro-button text-2xl px-12 py-4 cosmic-border float-element">
-            🛸 INITIATE PROTOCOL 🛸
-          </button>
-          <div className="mt-4">
-            <p className="terminal-text text-sm">
-              <span className="blink">★</span> No earthly credentials required -
-              The algorithms will guide you <span className="blink">★</span>
-            </p>
-          </div>
+          {isAuthenticated ? (
+            <div className="space-y-4">
+              <div className="retro-window max-w-md mx-auto">
+                <div className="retro-window-header">
+                  <span>✅ COSMIC CONNECTION ACTIVE ✅</span>
+                </div>
+                <div className="retro-window-content text-center">
+                  <div className="text-neon-green terminal-text mb-2">
+                    Welcome back, {user?.display_name || "Space Traveler"}!
+                  </div>
+                  <div className="text-sm mb-4">
+                    Your Spotify frequencies are synchronized with the
+                    mothership.
+                  </div>
+                  <button
+                    onClick={handleProceedToPlaylists}
+                    className="retro-button text-xl px-8 py-3 cosmic-border float-element"
+                  >
+                    🚀 CONTINUE MISSION 🚀
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <button
+                onClick={handleSpotifyConnect}
+                className="retro-button text-2xl px-12 py-4 cosmic-border float-element"
+              >
+                🎧 CONNECT TO SPOTIFY 🎧
+              </button>
+              <div className="mt-4">
+                <p className="terminal-text text-sm">
+                  <span className="blink">★</span> Connect your music library to
+                  the cosmic algorithm <span className="blink">★</span>
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Sacred Statistics */}

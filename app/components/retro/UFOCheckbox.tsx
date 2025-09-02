@@ -12,24 +12,38 @@ export const UFOCheckbox = ({
   label,
   description,
   className = "",
+  checked,
   ...props
 }: UFOCheckboxProps) => {
   return (
-    <div className={`flex items-center space-x-3 ${className}`}>
-      <div className="relative">
+    <label
+      className={`flex items-center space-x-3 cursor-pointer ${className}`}
+    >
+      <div className="flex items-center">
         <input
           type="checkbox"
-          className="ufo-checkbox opacity-0 absolute inset-0 z-10 cursor-pointer"
+          className="sr-only"
+          checked={checked}
           {...props}
         />
-        <div className="w-8 h-8 cosmic-border bg-deep-space flex items-center justify-center text-xl">
-          🛸
+        <div
+          className={`w-6 h-6 cosmic-border flex items-center justify-center text-lg font-bold transition-all ${
+            checked
+              ? "bg-neon-green text-cosmic-black"
+              : "bg-deep-space text-neon-cyan"
+          }`}
+        >
+          {checked ? "×" : ""}
         </div>
       </div>
       {(label || description) && (
         <div className="flex-1">
           {label && (
-            <div className="terminal-text font-bold text-neon-green">
+            <div
+              className={`terminal-text font-bold transition-colors ${
+                checked ? "text-neon-green" : "text-retro-gray"
+              }`}
+            >
               {label}
             </div>
           )}
@@ -38,6 +52,6 @@ export const UFOCheckbox = ({
           )}
         </div>
       )}
-    </div>
+    </label>
   );
 };

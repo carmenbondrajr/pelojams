@@ -130,7 +130,10 @@ interface BlinkingTextProps extends RetroComponentProps {
   color?: string;
 }
 
-export const BlinkingText = ({ children, speed = "medium" }: BlinkingTextProps) => {
+export const BlinkingText = ({
+  children,
+  speed = "medium",
+}: BlinkingTextProps) => {
   // Component implementation
 };
 ```
@@ -152,6 +155,31 @@ export const BlinkingText = ({ children, speed = "medium" }: BlinkingTextProps) 
 - Prefer `Record<string, unknown>` over `any`
 - Use proper type annotations for props and return values
 - Import types with `import type` when possible
+
+### Comment Guidelines
+
+**DO NOT** write comments that:
+
+- Reference past states of code ("Note: This used to be X")
+- Explain what was removed or changed historically
+- Document previous implementations or decisions
+
+**DO** write comments that:
+
+- Explain complex business logic or algorithms
+- Clarify non-obvious "why" decisions
+- Document API requirements or external constraints
+- Provide context for future maintainers
+
+Example:
+
+```typescript
+// ❌ BAD - Historical reference
+// Note: Client secret is no longer stored here for security
+
+// ✅ GOOD - Explains current purpose
+// Token exchange handled server-side for security
+```
 
 ### File Organization
 

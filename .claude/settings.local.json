@@ -6,7 +6,15 @@
       "Bash(tree:*)",
       "Bash(npm run dev:*)",
       "Bash(npm install:*)",
-      "Bash(make:*)"
+      "Bash(make:*)",
+      "Bash(cat:*)",
+      "Read(/Users/carmen/dev/music-migrator/**)",
+      "Read(/Users/carmen/dev/music-migrator/**)",
+      "Read(/Users/carmen/dev/music-migrator/**)",
+      "Read(/Users/carmen/dev/music-migrator/src/**)",
+      "Bash(npm run typecheck:*)",
+      "Bash(npx prettier:*)",
+      "Bash(git checkout:*)"
     ],
     "deny": [],
     "ask": []
